@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
 const Transaction = mongoose.model('Transaction', {
-    transaction_id : Number,
     user_id : Number,
     origin_currency : String,
     origin_value : Number,
