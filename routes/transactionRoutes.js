@@ -50,13 +50,10 @@ router.post('/', async (req, res) => {
           headers: myHeaders
         };
         
-        console.log("https://api.apilayer.com/currency_data/convert?to="+destination_currency+"&from="+origin_currency+"&amount="+origin_value)
         const response = await fetch("https://api.apilayer.com/currency_data/convert?to="+origin_currency+"&from="+destination_currency+"&amount="+origin_value, requestOptions)
-        //const response = await fetch("https://api.exchangeratesapi.io/latest?base=EUR", requestOptions)
         const dados = await response.json();
+        transaction.conversion_rate = dados.info.quote;
         
-        transaction.conversion_rate = dados.quote; //recuperar da API
-        //transaction.destination_value = transaction.conversion_rate * origin_value
         const myDate = new Date().toISOString()
         transaction.date = myDate
         await Transaction.create(transaction)
@@ -66,7 +63,7 @@ router.post('/', async (req, res) => {
             "origin_currency": transaction.origin_currency,
             "origin_value": transaction.origin_value,
             "destination_currency" : transaction.destination_currency,
-            "destination_value": transaction.conversion_rate * origin_value,
+            "destination_value": (transaction.conversion_rate * origin_value).toFixed(2),
             "conversion_rate": transaction.conversion_rate,
             "date": transaction.date
         })
