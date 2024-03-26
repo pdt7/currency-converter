@@ -13,7 +13,11 @@ router.post('/', async (req, res) => {
         conversion_rate} = req.body
     
     if(!origin_currency){
-        res.status(422).json({error : 'O nome é obrigatorio!'})
+        res.status(422).json({error : 'Origin currency is mandatory!'})
+    }
+
+    if(!user_id){
+        res.status(422).json({error : 'User id is mandatory!'})
     }
 
     const transaction = {user_id,
@@ -26,7 +30,7 @@ router.post('/', async (req, res) => {
     try{
 
         await Transaction.create(transaction)
-        res.status(201).json({message: 'transacao inserida com sucesso!'})
+        res.status(201).json({message: 'transaction entered successfully!'})
 
     }catch (error){
         res.status(500).json({error: error})
@@ -37,6 +41,20 @@ router.get('/:id', async (req, res) => {
     const id = req.params.id
     try{
         const transaction = await Transaction.findOne({_id: id})
+        if(!transaction){
+            res.status(422).json({message : "Transacao nao encontrada"})
+            return
+        }
+        res.status(200).json(transaction)
+    }catch{
+        res.status(500).json({error: error})
+    }
+})
+
+router.get('/users/:id', async (req, res) => {
+    const id = req.params.id
+    try{
+        const transaction = await Transaction.findOne({"user_id":id})
         if(!transaction){
             res.status(422).json({message : "Transacao nao encontrada"})
             return
@@ -61,7 +79,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-//update - PUT or PATCH
+//update - PATCH
 router.patch('/:id', async (req, res) => {
     console.log(req)
     const id = req.params.id
@@ -94,7 +112,7 @@ router.patch('/:id', async (req, res) => {
     }
 })
 
-//delete
+//delete transaction
 router.delete('/:id', async(req, res) => {
     const id = req.params.id
     try{
@@ -104,7 +122,7 @@ router.delete('/:id', async(req, res) => {
             return
         }
         await Transaction.deleteOne({_id: id})
-        res.status(200).json({message : "Usuario removido com sucesso"})
+        res.status(200).json({message : "Transacao removida com sucesso"})
     }catch{
         res.status(500).json({error: error})
     }
