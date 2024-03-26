@@ -21,7 +21,7 @@ const DB_PASSWORD = encodeURIComponent(process.env.DB_PASSWORD)
 
 mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@currency-converter-clus.tzqp1lz.mongodb.net/?retryWrites=true&w=majority&appName=currency-converter-cluster`)
 .then(() => {
-    console.log('Conectamos ao MongoDB!')
+    console.log('MongoDB connected!')
     app.listen(3000)
 })
 .catch((err) => console.log(err))

@@ -5,9 +5,8 @@ const Transaction = mongoose.model('Transaction', {
     origin_currency : String,
     origin_value : Number,
     destination_currency : String,
-    destination_value : Number,
     conversion_rate : Number,
-    
+    date: Date
 })
 
 module.exports = Transaction
