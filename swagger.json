@@ -1,0 +1,134 @@
+{   "swagger": "2.0",
+    "openpi": "3.1.0",
+    "info":{
+        "title" : "Currency Converter",
+        "description" : "API developed to Jaya´s challenge to join as a senior java developer",
+        "contact":{
+            "email": "paulodt@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths" : {
+        "/transaction/users/{id}":{
+            "get":{
+                "summary": "Read all Currencys converter by user_id",
+                "description": "This route return all currencys converter by user_id",
+                "tags": ["Users"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema" : {
+                                "$ref": "#/components/schemas/Transaction"    
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/transaction/{id}":{
+            "get":{
+                "summary": "Read Currency converter by transaction_id",
+                "description": "This route return currency converter by transaction_id",
+                "tags": ["Transaction"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema" : {
+                                "$ref": "#/components/schemas/Transaction"    
+                            }
+                        }
+                    }
+                }
+            },
+            "patch":{
+                "summary": "Update Currency converter by transaction_id",
+                "description": "This route rupdate the currency converter by user_id",
+                "tags": ["Transaction"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema" : {
+                                "$ref": "#/components/schemas/Transaction"    
+                            }
+                        }
+                    }
+                }
+            },
+            "delete":{
+                "summary": "Delete Currency converter by transaction_id",
+                "description": "This route delete currency converter by user_id",
+                "tags": ["Transaction"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema" : {
+                                "$ref": "#/components/schemas/Transaction"    
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/transaction":{
+            "post":{
+                "summary": "Create Currency converter",
+                "description": "This route do currency converter and save this information at mongoDB",
+                "tags": ["Transaction"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema" : {
+                                "$ref": "#/components/schemas/Transaction"    
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422":{
+                        "description": "Origin currency is mandatory!"
+                    },
+                    "200":{
+                        "description": "OK"
+                    }
+                }
+            },
+        
+            "get":{
+                "summary": "Read All Currency converter",
+                "description": "This route read all currency converter",
+                "tags": ["Transaction"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema" : {
+                                "$ref": "#/components/schemas/Transaction"    
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components":{
+        "schemas":{
+            "Transaction":{
+                "type": "object",
+                "properties":{
+                    "user_id" : {
+                        "type":"number"
+                    },
+                    "origin_currency" :{
+                        "type":"string"
+                    },
+                    "origin_value" : {
+                        "type":"number"
+                    },
+                    "destination_currency": {
+                        "type":"string"
+                    }
+                }
+            }
+        }
+    }
+}

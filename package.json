@@ -16,6 +16,8 @@
     "jest": "^29.7.0",
     "mongoose": "^8.2.2",
     "nodemon": "^3.1.0",
-    "supertest": "^6.3.4"
+    "supertest": "^6.3.4",
+    "swagger-express": "^1.0.5",
+    "swagger-ui-express": "^5.0.0"
   }
 }

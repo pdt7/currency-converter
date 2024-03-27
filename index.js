@@ -3,6 +3,8 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocs = require('./swagger.json')
 
 app.use(
     express.urlencoded({
@@ -15,6 +17,8 @@ app.use(express.json())
 const transactionRouters = require('./routes/transactionRoutes')
 
 app.use('/transaction', transactionRouters)
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
 const DB_USER = process.env.DB_USER
 const DB_PASSWORD = encodeURIComponent(process.env.DB_PASSWORD)

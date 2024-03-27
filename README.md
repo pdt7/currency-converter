@@ -2,6 +2,8 @@ This project was developed to Jaya´s challenge: create a currency converter usi
 
 to run this application use the command: npm start and to test: npm test
 
+documentation of this challenge was developed with swagger and available at link http://localhost:3000/api-docs/
+
 To build the API rest the technology used is node.js, 2 folders was created:
     1 - models - to describe the informations to transaction
     2 - routes - to define the routes off aplicattion
